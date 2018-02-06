@@ -142,9 +142,7 @@ module.exports =
 	        return log.type && types_filter.indexOf(log.type) >= 0;
 	      };
 
-	      context.logs = context.logs.filter(function (l) {
-	        return l.type !== 'sapi' && l.type !== 'fapi';
-	      }).filter(log_matches_level).filter(log_matches_types);
+	      context.logs = context.logs.filter(log_matches_level).filter(log_matches_types);
 
 	      callback(null, context);
 	    }, function (context, callback) {
@@ -340,10 +338,12 @@ module.exports =
 	    level: 3 // Error
 	  },
 	  'sapi': {
-	    event: 'API Operation'
+	    event: 'API Operation',
+	    level: 1 // Info
 	  },
 	  'fapi': {
-	    event: 'Failed API Operation'
+	    event: 'Failed API Operation',
+	    level: 3 // Error
 	  },
 	  'limit_wc': {
 	    event: 'Blocked Account',
